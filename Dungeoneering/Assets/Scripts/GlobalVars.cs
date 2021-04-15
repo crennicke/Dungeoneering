@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class GlobalVars : MonoBehaviour
 {
+    public GameObject go;
+
     bool redKey = false;
     bool blueKey = false;
     bool purpleKey = false;
     bool greenKey = false;
+
+    private void Start()
+    {
+        go.SetActive(false);
+    }
 
     public void SetRedKey()
     {
@@ -35,6 +42,16 @@ public class GlobalVars : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private void Update()
+    {
+        Debug.Log(redKey);
+        if (redKey && greenKey && purpleKey && blueKey)
+        {
+            Debug.Log("It's true");
+            go.SetActive(true);
         }
     }
 }
