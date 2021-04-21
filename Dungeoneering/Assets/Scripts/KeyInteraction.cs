@@ -18,7 +18,8 @@ public class KeyInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate((transform.right + Vector3.right) * Time.deltaTime);
+        transform.Rotate((transform.right + Vector3.right) * Time.deltaTime * 2);
+        transform.Rotate((transform.up + Vector3.up) * Time.deltaTime * 2);
     }
 
     void OnTriggerEnter(Collider collider)
