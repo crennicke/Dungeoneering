@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 
                 int res = Random.Range(0, 2);
-                Debug.Log(res);
                 sm.sounds[res].Play();
             }
         }
