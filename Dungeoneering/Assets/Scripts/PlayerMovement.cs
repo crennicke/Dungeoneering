@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public SoundManager sm;
 
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -30,6 +31,17 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+
+        if(move.x != 0 || move.z != 0)
+        {
+            if(!sm.sounds[0].isPlaying && !sm.sounds[1].isPlaying)
+            {
+                
+                int res = Random.Range(0, 2);
+                Debug.Log(res);
+                sm.sounds[res].Play();
+            }
+        }
 
         controller.Move(move * speed * Time.deltaTime);
 

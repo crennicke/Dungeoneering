@@ -7,23 +7,26 @@ public class KeyInteraction : MonoBehaviour
     public GameObject globalVars;
     public string color = "red";
     public GameObject light;
+    private SoundManager sm;
 
     // Start is called before the first frame update
     void Start()
     {
         globalVars = GameObject.Find("GlobalVars");
+        sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         light.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate((transform.right + Vector3.right) * Time.deltaTime * 2);
-        transform.Rotate((transform.up + Vector3.up) * Time.deltaTime * 2);
+        transform.Rotate((transform.right + Vector3.right) * Time.deltaTime * 4);
+        transform.Rotate((transform.up + Vector3.up) * Time.deltaTime * 4);
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        sm.sounds[2].Play();
         if (color.Equals("blue"))
         {
             globalVars.GetComponent<GlobalVars>().SetBlueKey();
