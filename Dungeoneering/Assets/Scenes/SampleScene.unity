@@ -5200,7 +5200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490352353115f4ea19852b34e8414319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: SimonSays
+  sceneName: ObstacleCourse
 --- !u!136 &325367543
 CapsuleCollider:
   m_ObjectHideFlags: 0
