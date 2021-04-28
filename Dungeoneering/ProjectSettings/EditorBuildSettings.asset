@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SimonSays1.0.unity
     guid: aa952226341e1458cb8b048f6545e4d4
+  - enabled: 1
+    path: Assets/Scenes/ObstacleCourse.unity
+    guid: 0376c40fae70044c9bb35830384c4599
   m_configObjects: {}
