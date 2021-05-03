@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -183,7 +184,8 @@ public class GameManager : MonoBehaviour {
     // TODO 
     void tryAgain()
     {
-        quit();
+        ScoreCounter.scoreValue = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void quit()
     {
