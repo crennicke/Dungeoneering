@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Lore_Page_Interaction : MonoBehaviour
 {
+    [SerializeField] private Image customImage;
 
     public GameObject globalVars;
     public string page_num = "1";
@@ -13,8 +14,6 @@ public class Lore_Page_Interaction : MonoBehaviour
     Vector3 tempPos = new Vector3();
     public float amplitude = 0.5f;
     public float frequency = 1f;
-
-    public Text Page1;
 
     // Start is called before the first frame update
     void Start()
@@ -40,29 +39,57 @@ public class Lore_Page_Interaction : MonoBehaviour
         if (page_num.Equals("1"))
         {
 
-
+            customImage.enabled = true;
         }
         else if (page_num.Equals("2"))
         {
-
+            customImage.enabled = true;
 
         }
         else if (page_num.Equals("3"))
         {
-
+            customImage.enabled = true;
 
         }
         else if (page_num.Equals("4"))
         {
-
+            customImage.enabled = true;
 
         }
         else if (page_num.Equals("5"))
         {
 
+            customImage.enabled = true;
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (page_num.Equals("1"))
+        {
+            customImage.enabled = false;
 
         }
-        Destroy(gameObject);
+        else if (page_num.Equals("2"))
+        {
+            customImage.enabled = false;
+
+        }
+        else if (page_num.Equals("3"))
+        {
+            customImage.enabled = false;
+
+        }
+        else if (page_num.Equals("4"))
+        {
+
+            customImage.enabled = false;
+        }
+        else if (page_num.Equals("5"))
+        {
+
+            customImage.enabled = false;
+        }
     }
 
 
