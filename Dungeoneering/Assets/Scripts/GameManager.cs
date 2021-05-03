@@ -9,10 +9,16 @@ public class GameManager : MonoBehaviour {
     public GameObject gameButtonPrefab;
     public GameObject scorePrefab;
     public GameObject GameOverPopup;
+    public GameObject WinnerPopup;
+    public GameObject GameFieldPannel;
+    public GameObject options;
+    public GameObject youRock;
     
     public GameObject TryAgain;
     public GameObject Quit;
+    public GameObject Exit;
     public GameObject StartButton;
+    public GameObject Continue;
 
     public List<ButtonSetting> buttonSettings;
 
@@ -21,6 +27,8 @@ public class GameManager : MonoBehaviour {
     List<GameObject> gameButtons;
 
     int bleepCount = 0;
+    int winScore = 10; 
+    bool highScoreMode = false;
 
     List<int> bleeps;
     List<int> playerBleeps;
@@ -36,14 +44,6 @@ public class GameManager : MonoBehaviour {
     {
         bleeps = new List<int>();
         playerBleeps = new List<int>();
-
-        TryAgain.GetComponent<Button>().onClick.AddListener(() => {
-            tryAgain();
-        });
-        Quit.GetComponent<Button>().onClick.AddListener(() => {
-            quit();
-        });
-
         gameButtons = new List<GameObject>();
         CreateScoreBoard(new Vector3(0,160));
 
@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour {
 
         if(bleeps.Count == playerBleeps.Count) {
             ScoreCounter.scoreValue = bleeps.Count;
+            if (bleeps.Count >= winScore && highScoreMode == false){
+                Winner();
+                return;
+            }
             playerBleeps = new List<int>();
             StartCoroutine(SimonSays());
         }
@@ -172,6 +176,34 @@ public class GameManager : MonoBehaviour {
             bleepCount++; 
         }
     }
+    IEnumerator delayTextPopup(int time){
+        yield return new WaitForSecondsRealtime(time);
+        youRock.SetActive(true);
+    }
+
+    IEnumerator delayOptionsPopup(int time){
+        yield return new WaitForSecondsRealtime(time);
+        options.SetActive(true);
+    }
+
+    /*
+    * Game over and popup buttons
+    */
+    void Winner() {
+        GameFieldPannel.SetActive(false);
+        WinnerPopup.SetActive(true);
+        inputEnabled = false;
+        StartCoroutine(delayTextPopup(2));
+        StartCoroutine(delayOptionsPopup(3));
+
+
+        Exit.GetComponent<Button>().onClick.AddListener(() => {
+            quit();
+        });
+        Continue.GetComponent<Button>().onClick.AddListener(() => {
+            setHighScoreMode();
+        });
+    }
 
     /*
     * Game over and popup buttons
@@ -180,8 +212,17 @@ public class GameManager : MonoBehaviour {
         GameOverPopup.SetActive(true);
         inputEnabled = false;
 
+        TryAgain.GetComponent<Button>().onClick.AddListener(() => {
+            tryAgain();
+        });
+        Quit.GetComponent<Button>().onClick.AddListener(() => {
+            quit();
+        });
     }
-    // TODO 
+    /*
+    * Reloads the scene for re-attempt at reaching winScore threshold
+    */
+
     void tryAgain()
     {
         ScoreCounter.scoreValue = 0;
@@ -194,5 +235,13 @@ public class GameManager : MonoBehaviour {
          #else
          Application.Quit();
          #endif
+    }
+    void setHighScoreMode(){
+        WinnerPopup.SetActive(false);
+        GameFieldPannel.SetActive(true);
+        highScoreMode = true;
+        inputEnabled = true;
+        playerBleeps = new List<int>();
+        StartCoroutine(SimonSays());
     }
 }
